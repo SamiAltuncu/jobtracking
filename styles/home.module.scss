@@ -47,11 +47,20 @@
                             font-weight: bolder;
                             padding-top: 5px;
                             padding-bottom: 5px;
+                            font-size: 14px;
 
                             &::before {
                                 content: none !important;
                             }
                         }
+                    }
+                }
+
+                .ant-table-tbody {
+                    .ant-btn-primary {
+                        color: #757575;
+                        border-color: #e8e8e8;
+                        background: #e8e8e8;
                     }
                 }
             }
