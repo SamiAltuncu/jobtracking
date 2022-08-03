@@ -35,15 +35,22 @@
         }
 
         .ant-table-wrapper {
-            .ant-table-thead {
-                > tr {
-                    > th {
-                        background: #e4eafd;
-                        color: #76777a;
-                        font-weight: bolder;
+            .ant-table-content {
+                border: 1px solid #e4eafd;
+                border-top: none;
 
-                        &::before {
-                            content: none !important;
+                .ant-table-thead {
+                    > tr {
+                        > th {
+                            background: #e4eafd;
+                            color: #76777a;
+                            font-weight: bolder;
+                            padding-top: 5px;
+                            padding-bottom: 5px;
+
+                            &::before {
+                                content: none !important;
+                            }
                         }
                     }
                 }

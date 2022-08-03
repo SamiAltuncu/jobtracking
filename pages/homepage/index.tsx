@@ -113,7 +113,7 @@ function HomePage() {
                 okText='Save'
                 className={styles.modalStyle}
                 closable={false}
-                visible={true}
+                visible={false}
             >
                 <div className='d-flex flex-row align-items-center justify-content-center'>
                     <p className={styles["modal-title"]}>Job Edit</p>
