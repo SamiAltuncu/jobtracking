@@ -8,7 +8,7 @@ const Header: React.FC<any> = () => {
             <div className={styles.logo}>
                 <Link href={"/"} passHref>
                     <a>
-                        <img src="https://icdn.ensonhaber.com/cdn/desktop/img/logo.png" alt="Logo" />
+                        <img src="img/logo.png" alt="Logo" />
                     </a>
                 </Link>
             </div>
