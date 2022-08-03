@@ -1,0 +1,99 @@
+.new-job {
+    overflow: hidden;
+
+    p {
+        color: #757575;
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+
+    .title {
+        font-weight: bold;
+        letter-spacing: -0.25px;
+        margin: 20px 0 10px 0;
+    }
+
+    .list-head {
+        margin-top: 25px;
+        font-weight: bolder;
+        font-size: 18px;
+        letter-spacing: -0.5px;
+    }
+
+    :global {
+        .ant-input {
+            border-radius: 5px;
+        }
+
+        .ant-select {
+            width: 100%;
+            border-radius: 5px;
+
+            .ant-select-selection-placeholder {
+                color: rgba(0, 0, 0, 0.85);
+            }
+        }
+
+        .ant-table-wrapper {
+            .ant-table-thead {
+                > tr {
+                    > th {
+                        background: #e4eafd;
+                        color: #76777a;
+                        font-weight: bolder;
+
+                        &::before {
+                            content: none !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.modalStyle {
+    .modal-text {
+        font-weight: bolder;
+        font-size: 21px;
+        margin-top: 10px;
+        letter-spacing: -0.5px;
+    }
+
+    .modal-title {
+        font-size: 21px;
+        font-weight: bold;
+    }
+    :global {
+        .ant-modal-body {
+            padding-bottom: 5px;
+        }
+        .ant-modal-footer {
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 5px;
+            padding-bottom: 25px;
+
+            .ant-btn {
+                width: 135px;
+                height: 35px;
+
+                &:nth-child(1) {
+                    background: #e8e8e8;
+                    border: none;
+                    color: #7d7d7d;
+                    font-weight: bold;
+                }
+
+                &:nth-child(2) {
+                    margin-left: 30px;
+                    background: rgb(232, 61, 109);
+                    border: none;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
