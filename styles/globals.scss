@@ -52,32 +52,35 @@ p {
   margin-top: 1rem !important;
 }
 
-.Regular {
+.regular {
   .ant-tag {
     background-color: #f1a824;
     color: #fff;
     border: none;
     padding: 5px 15px;
+    text-transform: capitalize;
     border-radius: 5px;
   }
 }
 
-.Urgent {
+.urgent {
   .ant-tag {
     background-color: #e83d6d;
     color: #fff;
     border: none;
     padding: 5px 15px;
+    text-transform: capitalize;
     border-radius: 5px;
   }
 }
 
-.Trivial {
+.trivial {
   .ant-tag {
     background-color: #2277e0;
     color: #fff;
     border: none;
     padding: 5px 15px;
+    text-transform: capitalize;
     border-radius: 5px;
   }
 }

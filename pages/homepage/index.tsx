@@ -1,34 +1,45 @@
-import { DeleteOutlined, EditOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Col, Input, Row, Select, Space, Table, Tag } from 'antd';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { Button, Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
+import JobAdd from '../../components/JobAdd';
+import JobApprove from '../../components/JobApprove';
+import JobEdit from '../../components/JobEdit';
+import { selectJobs } from '../../config/reducer/jobsSlice';
+import { toggleEditModal } from '../../config/reducer/modalSlice';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import styles from '../../styles/home.module.scss';
 
-const { Option } = Select;
-
-interface DataType {
-    key: string;
-    name: string;
-    tags?: "Urgent" | "Regular" | "Trivial";
-}
-
-const ModalBox = dynamic(() => import("../../components/ModalBox"), { ssr: false });
 function HomePage() {
-    const [visible, setVisible] = useState<boolean>(false);
+    const [approve, setApprove] = useState<boolean>(false);
+    const [edit, setEdit] = useState<boolean>(false);
+    const { jobs } = useAppSelector(selectJobs);
+    const dispatch = useAppDispatch();
 
-    function onDelete() {
-        setVisible(!visible);
+    function onEdit(j?: Jobs) {
+        onVisibleEdit();
+        dispatch(toggleEditModal(j));
     }
 
-    function onCancel() {
-        setVisible(!visible);
+    function onCancel(j?: Jobs) {
+        setApprove(!approve);
+        dispatch(toggleEditModal(j));
     }
 
-    const columns: ColumnsType<DataType> = [
+    function onVisibleEdit() {
+        setEdit(!edit);
+    }
+
+    function onVisibleApprove() {
+        setApprove(!approve);
+    }
+
+    const columns: ColumnsType<any> = [
         {
             title: 'Name',
             key: 'name',
+            dataIndex: 'name',
             width: 750
         },
         {
@@ -46,92 +57,24 @@ function HomePage() {
             title: 'Action',
             key: 'action',
             width: 100,
-            render: () => (
+            render: (a) => (
                 <Space size="middle">
-                    <Button type="primary" icon={<EditOutlined />} />
-                    <Button type="primary" onClick={onDelete} icon={<DeleteOutlined />} />
+                    <Button type="primary" onClick={() => onEdit(a)} icon={<EditOutlined />} />
+                    <Button type="primary" onClick={() => onCancel(a)} icon={<DeleteOutlined />} />
                 </Space>
             )
         }
     ];
 
-    const data: DataType[] = [
-        {
-            key: '1',
-            name: 'John Brown',
-            tags: 'Urgent'
-        },
-        {
-            key: '2',
-            name: 'Jim Green',
-            tags: 'Regular'
-        },
-        {
-            key: '3',
-            name: 'Joe Black',
-            tags: 'Trivial'
-        }
-    ];
-
     return (
-        <>
-            <div className={styles["new-job"]}>
-                <h3 className={styles.title}>Create New Job</h3>
-                <Row className='d-flex' gutter={8}>
-                    <Col className="gutter-row" span={16}>
-                        <p>Job Name</p>
-                        <Input />
-                    </Col>
-                    <Col className="gutter-row" span={6}>
-                        <p>Job Priority</p>
-                        <Select placeholder="Choose">
-                            <Option value="urgent">Urgent</Option>
-                            <Option value="regular">Regular</Option>
-                            <Option value="trivial">Trivial</Option>
-                        </Select>
-                    </Col>
-                    <Col className="gutter-row d-flex align-items-end" span={2}>
-                        <Button type="primary" icon={<PlusOutlined />}>Create</Button>
-                    </Col>
-                </Row>
-                <h3 className={styles["list-head"]}>Job List</h3>
-                <Table pagination={false} columns={columns} dataSource={data} />
-            </div>
-            <ModalBox
-                okText='Approve'
-                onCancel={onCancel}
-                className={styles.modalStyle}
-                closable={false}
-                visible={visible}
-            >
-                <div className='d-flex flex-row align-items-center justify-content-center'>
-                    <ExclamationCircleOutlined style={{ fontSize: "36px", color: "#e83d6d" }} />
-                    <p className={styles["modal-text"]}>Are you sure you want to delete it?</p>
-                </div>
-            </ModalBox>
-            <ModalBox
-                okText='Save'
-                className={styles.modalStyle}
-                closable={false}
-                visible={false}
-            >
-                <div className='d-flex flex-row align-items-center justify-content-center'>
-                    <p className={styles["modal-title"]}>Job Edit</p>
-                    <div className="w-100">
-                        <p>Job Name</p>
-                        <Input />
-                    </div>
-                    <div className="w-100 mt-3">
-                        <p>Job Priority</p>
-                        <Select className="w-100" placeholder="Choose">
-                            <Option value="urgent">Urgent</Option>
-                            <Option value="regular">Regular</Option>
-                            <Option value="trivial">Trivial</Option>
-                        </Select>
-                    </div>
-                </div>
-            </ModalBox>
-        </>
+        <div className={styles["new-job"]}>
+            <h3 className={styles.title}>Create New Job</h3>
+            <JobAdd jobs={jobs} />
+            <h3 className={styles["list-head"]}>Job List</h3>
+            <Table pagination={false} columns={columns} dataSource={jobs} />
+            <JobApprove visible={approve} onVisible={onVisibleApprove} onCancel={() => onCancel()} />
+            <JobEdit visible={edit} onVisible={onVisibleEdit} onCancel={() => onEdit()} />
+        </div>
     )
 }
 

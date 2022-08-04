@@ -1,6 +1,9 @@
 import 'antd/dist/antd.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { Toaster } from 'react-hot-toast';
+import { Provider } from 'react-redux';
+import { store } from '../config/store';
 import Layout from '../layout/Layout';
 import '../styles/globals.scss';
 
@@ -13,10 +16,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>Kişisel İş Takip Uygulaması</title>
       </Head>
       <Layout>
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       </Layout>
+      <Toaster />
     </>
   )
 }
 
-export default MyApp
+export default MyApp;
