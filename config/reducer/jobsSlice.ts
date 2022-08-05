@@ -13,6 +13,9 @@ export const jobsSlice = createSlice({
     name: 'job',
     initialState,
     reducers: {
+        initJobs: (state, action: PayloadAction<Jobs[]>): void => {
+            state.jobs = action.payload;
+        },
         addJobs: (state, action: PayloadAction<Jobs>): void => {
             state.jobs.push(action.payload);
         },
@@ -32,6 +35,6 @@ export const jobsSlice = createSlice({
     }
 });
 
-export const { addJobs, editTodo, deleteTodo } = jobsSlice.actions;
+export const { initJobs, addJobs, editTodo, deleteTodo } = jobsSlice.actions;
 export const selectJobs = (state: RootState) => state.job;
 export default jobsSlice.reducer;

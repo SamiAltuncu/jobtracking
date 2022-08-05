@@ -48,7 +48,7 @@ const JobEdit: React.FC<JobEditProps> = (props) => {
                 <p className={styles["modal-title"]}>Job Edit</p>
                 <div className="w-100">
                     <p>Job Name</p>
-                    <Input value={name} />
+                    <Input readOnly value={name} />
                 </div>
                 <div className="w-100 mt-3">
                     <p>Job Priority</p>

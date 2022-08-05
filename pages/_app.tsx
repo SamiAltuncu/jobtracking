@@ -1,13 +1,12 @@
 import 'antd/dist/antd.css';
-import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { Toaster } from 'react-hot-toast';
 import { Provider } from 'react-redux';
-import { store } from '../config/store';
+import { initJobs } from '../config/reducer/jobsSlice';
+import { store, wrapper } from '../config/store';
 import Layout from '../layout/Layout';
 import '../styles/globals.scss';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: any) {
   return (
     <>
       <Head>
@@ -20,9 +19,17 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </Provider>
       </Layout>
-      <Toaster />
     </>
   )
 }
 
-export default MyApp;
+MyApp.getInitialProps = wrapper.getInitialPageProps(({ dispatch }) => async () => {
+  const res = await fetch(`http://localhost:3000/api/jobs`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+  });
+  const data = await res.json();
+  dispatch(initJobs(data));
+});
+
+export default wrapper.withRedux(MyApp);
