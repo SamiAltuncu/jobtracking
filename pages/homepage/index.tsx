@@ -3,7 +3,6 @@ import { Button, Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react';
 import { JobAdd, JobApprove, JobEdit, JobFilter } from '../../components';
-import { selectJobs } from '../../config/reducer/jobsSlice';
 import { toggleEditModal } from '../../config/reducer/modalSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
@@ -12,7 +11,7 @@ import styles from '../../styles/home.module.scss';
 function HomePage() {
     const [approve, setApprove] = useState<boolean>(false);
     const [edit, setEdit] = useState<boolean>(false);
-    const { jobs } = useAppSelector(selectJobs);
+    const { jobs } = useAppSelector((state) => state.job?.jobs);
     const search = useAppSelector((state) => state.job?.search);
     const dispatch = useAppDispatch();
 
