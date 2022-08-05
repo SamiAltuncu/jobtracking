@@ -13,6 +13,7 @@ function HomePage() {
     const [approve, setApprove] = useState<boolean>(false);
     const [edit, setEdit] = useState<boolean>(false);
     const { jobs } = useAppSelector(selectJobs);
+    const search = useAppSelector((state) => state.job?.search);
     const dispatch = useAppDispatch();
 
     function onEdit(j?: Jobs) {
@@ -69,7 +70,7 @@ function HomePage() {
             <h3 className={styles.title}>Create New Job</h3>
             <JobAdd jobs={jobs} />
             <h3 className={styles["list-head"]}>Job List</h3>
-            <JobFilter jobs={jobs} />
+            <JobFilter search={search} />
             <Table pagination={false} columns={columns} dataSource={jobs} />
             <JobApprove visible={approve} onVisible={onVisibleApprove} onCancel={() => onCancel()} />
             <JobEdit visible={edit} onVisible={onVisibleEdit} onCancel={() => onEdit()} />

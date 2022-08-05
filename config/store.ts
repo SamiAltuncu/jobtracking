@@ -24,7 +24,7 @@ export const store = configureStore({
 });
 
 const makeStore = () => store;
-store.subscribe(() => { saveState(store.getState()?.job?.jobs) });
+store.subscribe(() => { saveState(store.getState()?.job?.search) });
 
 export const wrapper = createWrapper(makeStore);
 export type RootState = ReturnType<typeof store.getState>;

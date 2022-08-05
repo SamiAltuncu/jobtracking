@@ -1,21 +1,19 @@
 import { SearchOutlined } from '@ant-design/icons';
 import { Col, Input, Row, Select } from 'antd';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { setJobs } from '../config/reducer/jobsSlice';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import styles from '../styles/custom.module.scss';
 
 export interface JobFilterProps {
-    jobs: Jobs[]
+    search: Jobs[]
 }
 
 const { Option } = Select;
 export const JobFilter: React.FC<JobFilterProps> = (props) => {
     const [priority, setPriority] = useState<string>("all");
     const [name, setName] = useState<string>();
-
     const dispatch = useAppDispatch();
-    const jobsCache = useRef<Jobs[]>();
 
     const onChangeName = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const filterJobs = getFilter(e.target.value, priority);
@@ -24,13 +22,12 @@ export const JobFilter: React.FC<JobFilterProps> = (props) => {
     }
 
     function getFilter(value: any, priority: string) {
-        const filterCache = [...jobsCache.current ?? []];
+        const filterCache = [...props.search ?? []];
         const filterJobs = filterCache.filter((x) => {
             if (priority === "all") return value?.length ? x.name?.indexOf(value) !== -1 : true;
             const t = x.tags?.toLocaleLowerCase() === priority;
             return value?.length ? x.name?.indexOf(value) !== -1 && t : t;
         });
-
         return filterJobs;
     }
 
@@ -39,10 +36,6 @@ export const JobFilter: React.FC<JobFilterProps> = (props) => {
         dispatch(setJobs(filterJobs));
         setPriority(value);
     }
-
-    useEffect(() => {
-        jobsCache.current = props.jobs;
-    }, []);
 
     return (
         <Row className={styles.customFilter} gutter={8}>
