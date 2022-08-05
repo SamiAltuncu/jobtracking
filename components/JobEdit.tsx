@@ -15,7 +15,7 @@ export interface JobEditProps {
 }
 
 const ModalBox = dynamic(() => import("./ModalBox"), { ssr: false });
-const JobEdit: React.FC<JobEditProps> = (props) => {
+export const JobEdit: React.FC<JobEditProps> = (props) => {
     const dispatch = useAppDispatch();
     const modal = useAppSelector((state) => state.modal);
     const [name, setName] = useState<string>("");
@@ -62,5 +62,3 @@ const JobEdit: React.FC<JobEditProps> = (props) => {
         </ModalBox>
     )
 }
-
-export default JobEdit

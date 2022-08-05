@@ -10,8 +10,7 @@ export interface JobAddProps {
 }
 
 const { Option } = Select;
-
-const JobAdd: React.FC<JobAddProps> = (props) => {
+export const JobAdd: React.FC<JobAddProps> = (props) => {
     const dispatch = useAppDispatch();
     const [name, setName] = useState<string>("");
     const [tag, setTag] = useState<Tags>();
@@ -50,5 +49,3 @@ const JobAdd: React.FC<JobAddProps> = (props) => {
         </Form>
     )
 }
-
-export default JobAdd;

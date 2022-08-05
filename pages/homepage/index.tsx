@@ -2,9 +2,7 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react';
-import JobAdd from '../../components/JobAdd';
-import JobApprove from '../../components/JobApprove';
-import JobEdit from '../../components/JobEdit';
+import { JobAdd, JobApprove, JobEdit, JobFilter } from '../../components';
 import { selectJobs } from '../../config/reducer/jobsSlice';
 import { toggleEditModal } from '../../config/reducer/modalSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
@@ -71,6 +69,7 @@ function HomePage() {
             <h3 className={styles.title}>Create New Job</h3>
             <JobAdd jobs={jobs} />
             <h3 className={styles["list-head"]}>Job List</h3>
+            <JobFilter jobs={jobs} />
             <Table pagination={false} columns={columns} dataSource={jobs} />
             <JobApprove visible={approve} onVisible={onVisibleApprove} onCancel={() => onCancel()} />
             <JobEdit visible={edit} onVisible={onVisibleEdit} onCancel={() => onEdit()} />

@@ -1,7 +1,7 @@
 import 'antd/dist/antd.css';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
-import { initJobs } from '../config/reducer/jobsSlice';
+import { setJobs } from '../config/reducer/jobsSlice';
 import { store, wrapper } from '../config/store';
 import Layout from '../layout/Layout';
 import '../styles/globals.scss';
@@ -29,7 +29,7 @@ MyApp.getInitialProps = wrapper.getInitialPageProps(({ dispatch }) => async () =
     headers: { 'Content-Type': 'application/json' }
   });
   const data = await res.json();
-  dispatch(initJobs(data));
+  dispatch(setJobs(data));
 });
 
 export default wrapper.withRedux(MyApp);

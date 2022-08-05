@@ -29,3 +29,25 @@
         }
     }
 }
+
+.customFilter {
+    background: #f1f4ff;
+    padding: 10px;
+
+    :global {
+        .ant-input {
+            margin-left: 25px;
+        }
+        .ant-input-suffix {
+            position: absolute;
+            left: 5px;
+            top: 8px;
+
+            .anticon {
+                svg {
+                    fill: #969999;
+                }
+            }
+        }
+    }
+}

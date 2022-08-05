@@ -13,9 +13,6 @@ export const jobsSlice = createSlice({
     name: 'job',
     initialState,
     reducers: {
-        initJobs: (state, action: PayloadAction<Jobs[]>): void => {
-            state.jobs = action.payload;
-        },
         addJobs: (state, action: PayloadAction<Jobs>): void => {
             state.jobs.push(action.payload);
         },
@@ -27,6 +24,9 @@ export const jobsSlice = createSlice({
                 }
             });
         },
+        setJobs: (state, action: PayloadAction<Jobs[]>): void => {
+            state.jobs = action.payload;
+        },
         deleteTodo: (state, action: PayloadAction<Jobs>): void => {
             state.jobs = state.jobs.filter(
                 (job: Jobs) => job.key !== action.payload.key
@@ -35,6 +35,6 @@ export const jobsSlice = createSlice({
     }
 });
 
-export const { initJobs, addJobs, editTodo, deleteTodo } = jobsSlice.actions;
+export const { setJobs, addJobs, editTodo, deleteTodo } = jobsSlice.actions;
 export const selectJobs = (state: RootState) => state.job;
 export default jobsSlice.reducer;

@@ -14,7 +14,7 @@ export interface JobApproveProps {
 }
 
 const ModalBox = dynamic(() => import("./ModalBox"), { ssr: false });
-const JobApprove: React.FC<JobApproveProps> = (props) => {
+export const JobApprove: React.FC<JobApproveProps> = (props) => {
     const modal = useAppSelector((state) => state.modal);
     const dispatch = useAppDispatch();
 
@@ -43,5 +43,3 @@ const JobApprove: React.FC<JobApproveProps> = (props) => {
         </ModalBox>
     )
 }
-
-export default JobApprove;
