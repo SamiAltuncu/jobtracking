@@ -54,7 +54,8 @@ function HomePage() {
             sorter: (a, b) => {
                 const sortOrder = ['urgent', 'regular', 'trivial'];
                 return sortOrder.indexOf(a.tags) - sortOrder.indexOf(b.tags);
-            }
+            },
+            responsive: ["xxl", "xl", "md", "sm"]
         },
         {
             title: 'Action',
