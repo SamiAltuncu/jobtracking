@@ -31,7 +31,11 @@ export const JobAdd: React.FC<JobAddProps> = (props) => {
 
     return (
         <Form ref={formRef} layout='inline' onFinish={onFinish} className={styles.customForm}>
-            <Form.Item label="Job Name" name="jobname" rules={[{ required: true, message: '' }]}>
+            <Form.Item label="Job Name" name="jobname" rules={[
+                { required: true, message: '' },
+                { max: 255, message: 'You cannot enter more than 255 characters' },
+                { pattern: /^[a-zA-Z0-9\-\s]+$/, message: 'Please use alphanumeric characters only' }
+            ]}>
                 <Input value={name} onChange={onChangeName} />
             </Form.Item>
             <Form.Item label="Job Priority" name="jobPriority" rules={[{ required: true, message: '' }]}>
@@ -41,7 +45,7 @@ export const JobAdd: React.FC<JobAddProps> = (props) => {
                     <Option value="trivial">Trivial</Option>
                 </Select>
             </Form.Item>
-            <Form.Item>
+            <Form.Item label=" ">
                 <Button type="primary" htmlType="submit" icon={<PlusOutlined />}>
                     Create
                 </Button>

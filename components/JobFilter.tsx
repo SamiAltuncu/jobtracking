@@ -39,10 +39,10 @@ export const JobFilter: React.FC<JobFilterProps> = (props) => {
 
     return (
         <Row className={styles.customFilter} gutter={8}>
-            <Col className="gutter-row" span={20}>
+            <Col className="gutter-row" xs={24} md={18} sm={18} xl={20}>
                 <Input placeholder='Job Name' onChange={onChangeName} suffix={<SearchOutlined />} />
             </Col>
-            <Col className="gutter-row" span={4}>
+            <Col className="gutter-row" xs={24} md={6} sm={6} xl={4}>
                 <Select value={priority} onChange={onChangePriority} placeholder="Priority (all)">
                     <Option value="all">Priority (all)</Option>
                     <Option value="urgent">Urgent</Option>

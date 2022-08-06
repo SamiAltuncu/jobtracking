@@ -1,3 +1,5 @@
+@import "./mixin";
+
 .customForm {
     :global {
         .ant-form-item {
@@ -11,20 +13,44 @@
 
             &:nth-child(1) {
                 width: 70%;
+
+                @include for-phone-only {
+                    width: 100%;
+                }
             }
 
             &:nth-child(2) {
                 width: 20%;
+
+                @include for-phone-only {
+                    width: 100%;
+                }
             }
 
             &:nth-child(3) {
-                display: flex;
-                align-items: flex-end;
-                width: 5%;
+                label {
+                    opacity: 0;
+                }
+
+                @include for-phone-only {
+                    label {
+                        display: none;
+                    }
+                }
             }
 
             &.ant-form-item-has-error {
                 margin-bottom: 0 !important;
+            }
+
+            button {
+                @include for-phone-only {
+                    width: 100%;
+                }
+            }
+
+            @include for-phone-only {
+                width: 100%;
             }
         }
     }
@@ -49,6 +75,14 @@
             .anticon {
                 svg {
                     fill: #969999;
+                }
+            }
+        }
+
+        .ant-col-xs-24 {
+            @include for-phone-only {
+                &:nth-child(1) {
+                    margin-bottom: 10px;
                 }
             }
         }

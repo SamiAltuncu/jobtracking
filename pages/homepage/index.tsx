@@ -11,7 +11,7 @@ import styles from '../../styles/home.module.scss';
 function HomePage() {
     const [approve, setApprove] = useState<boolean>(false);
     const [edit, setEdit] = useState<boolean>(false);
-    const { jobs } = useAppSelector((state) => state.job?.jobs);
+    const jobs = useAppSelector((state) => state.job?.jobs);
     const search = useAppSelector((state) => state.job?.search);
     const dispatch = useAppDispatch();
 
@@ -38,7 +38,8 @@ function HomePage() {
             title: 'Name',
             key: 'name',
             dataIndex: 'name',
-            width: 750
+            width: 750,
+            sorter: (a, b) => a.name.length - b.name.length
         },
         {
             title: 'Priority',
@@ -49,7 +50,11 @@ function HomePage() {
                         {t.tags}
                     </Tag>
                 </div>
-            )
+            ),
+            sorter: (a, b) => {
+                const sortOrder = ['urgent', 'regular', 'trivial'];
+                return sortOrder.indexOf(a.tags) - sortOrder.indexOf(b.tags);
+            }
         },
         {
             title: 'Action',
