@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const express = require("express");
 const router = express.Router();
 
@@ -18,7 +19,7 @@ function routes() {
 
     router.get("/jobs", (req, res) => {
         res.send(jobs);
-    });
+    })
 
     return router;
 }
