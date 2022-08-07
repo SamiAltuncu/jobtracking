@@ -1,6 +1,5 @@
 import { Action, AnyAction, combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
-import { saveState } from '../localStorage';
 import jobsReducer from './reducer/jobsSlice';
 import modalReducer from './reducer/modalSlice';
 
@@ -24,8 +23,6 @@ export const store = configureStore({
 });
 
 const makeStore = () => store;
-store.subscribe(() => { saveState(store.getState()?.job?.search) });
-
 export const wrapper = createWrapper(makeStore);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

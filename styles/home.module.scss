@@ -66,6 +66,18 @@
                     }
                 }
             }
+
+            .ant-spin-container {
+                .ant-table {
+                    opacity: 1;
+                }
+
+                &.ant-spin-blur {
+                    .ant-table {
+                        opacity: 0;
+                    }
+                }
+            }
         }
     }
 }

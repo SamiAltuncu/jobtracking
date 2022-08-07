@@ -24,9 +24,10 @@ export const JobFilter: React.FC<JobFilterProps> = (props) => {
     function getFilter(value: any, priority: string) {
         const filterCache = [...props.search ?? []];
         const filterJobs = filterCache.filter((x) => {
-            if (priority === "all") return value?.length ? x.name?.indexOf(value) !== -1 : true;
-            const t = x.tags?.toLocaleLowerCase() === priority;
-            return value?.length ? x.name?.indexOf(value) !== -1 && t : t;
+            const lowerName = x.name?.toLocaleLowerCase('tr')?.indexOf(value?.toLocaleLowerCase('tr')) !== -1;
+            if (priority === "all") return value?.length ? lowerName : true;
+            const lowerTags = x.tags?.toLocaleLowerCase('tr') === priority;
+            return value?.length ? lowerName && lowerTags : lowerTags;
         });
         return filterJobs;
     }

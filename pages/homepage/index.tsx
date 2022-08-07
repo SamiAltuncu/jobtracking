@@ -1,8 +1,9 @@
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Button, Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { JobAdd, JobApprove, JobEdit, JobFilter } from '../../components';
+import { initJobs } from '../../config/reducer/jobsSlice';
 import { toggleEditModal } from '../../config/reducer/modalSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
@@ -11,6 +12,7 @@ import styles from '../../styles/home.module.scss';
 function HomePage() {
     const [approve, setApprove] = useState<boolean>(false);
     const [edit, setEdit] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
     const jobs = useAppSelector((state) => state.job?.jobs);
     const search = useAppSelector((state) => state.job?.search);
     const dispatch = useAppDispatch();
@@ -70,18 +72,28 @@ function HomePage() {
         }
     ];
 
+    useEffect(() => {
+        const init = JSON.parse(localStorage.getItem("appState") ?? "[]") as Jobs[];
+        if (init.length) dispatch(initJobs(init));
+        setLoading(false);
+    }, []);
+
     return (
         <div className={styles["new-job"]}>
             <h3 className={styles.title}>Create New Job</h3>
             <JobAdd jobs={jobs} />
             <h3 className={styles["list-head"]}>Job List</h3>
             <JobFilter search={search} />
-            <Table pagination={false} columns={columns} dataSource={jobs} />
+            <Table
+                pagination={false}
+                columns={columns}
+                dataSource={jobs}
+                loading={{ indicator: <LoadingOutlined />, spinning: loading }}
+            />
             <JobApprove visible={approve} onVisible={onVisibleApprove} onCancel={() => onCancel()} />
             <JobEdit visible={edit} onVisible={onVisibleEdit} onCancel={() => onEdit()} />
         </div>
     )
 }
-
 
 export default HomePage

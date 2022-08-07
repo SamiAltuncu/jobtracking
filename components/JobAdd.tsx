@@ -34,7 +34,7 @@ export const JobAdd: React.FC<JobAddProps> = (props) => {
             <Form.Item label="Job Name" name="jobname" rules={[
                 { required: true, message: '' },
                 { max: 255, message: 'You cannot enter more than 255 characters' },
-                { pattern: /^[a-zA-Z0-9\-\s]+$/, message: 'Please use alphanumeric characters only' }
+                { pattern: /^[a-zA-Z0-9çÇşŞğĞüÜöÖıİ\-\s]+$/, message: 'Please use alphanumeric characters only' }
             ]}>
                 <Input value={name} onChange={onChangeName} />
             </Form.Item>
