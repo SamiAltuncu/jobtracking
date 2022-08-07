@@ -17,7 +17,7 @@ export const JobAdd: React.FC<JobAddProps> = (props) => {
     const formRef = React.createRef<FormInstance>();
 
     function onFinish() {
-        formRef.current!.resetFields();
+        formRef.current?.resetFields();
         dispatch(addJobs({ key: props.jobs.length + 1, name: name, tags: tag }));
     }
 
