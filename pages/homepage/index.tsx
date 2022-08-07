@@ -81,7 +81,7 @@ function HomePage() {
     return (
         <div className={styles["new-job"]}>
             <h3 className={styles.title}>Create New Job</h3>
-            <JobAdd jobs={jobs} />
+            <JobAdd search={search} />
             <h3 className={styles["list-head"]}>Job List</h3>
             <JobFilter search={search} />
             <Table

@@ -6,7 +6,7 @@ import { useAppDispatch } from '../hooks/useAppDispatch';
 import styles from '../styles/custom.module.scss';
 
 export interface JobAddProps {
-    jobs: Jobs[]
+    search: Jobs[]
 }
 
 const { Option } = Select;
@@ -18,7 +18,7 @@ export const JobAdd: React.FC<JobAddProps> = (props) => {
 
     function onFinish() {
         formRef.current?.resetFields();
-        dispatch(addJobs({ key: props.jobs.length + 1, name: name, tags: tag }));
+        dispatch(addJobs({ key: props.search.length + 1, name: name, tags: tag }));
     }
 
     function onChangeName(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
