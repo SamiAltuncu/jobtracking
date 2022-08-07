@@ -5,12 +5,10 @@ import { addJobs } from '../config/reducer/jobsSlice';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import styles from '../styles/custom.module.scss';
 
-export interface JobAddProps {
-    search: Jobs[]
-}
+export interface JobAddProps { }
 
 const { Option } = Select;
-export const JobAdd: React.FC<JobAddProps> = (props) => {
+export const JobAdd: React.FC<JobAddProps> = () => {
     const dispatch = useAppDispatch();
     const [name, setName] = useState<string>("");
     const [tag, setTag] = useState<Tags>();
@@ -18,7 +16,8 @@ export const JobAdd: React.FC<JobAddProps> = (props) => {
 
     function onFinish() {
         formRef.current?.resetFields();
-        dispatch(addJobs({ key: props.search.length + 1, name: name, tags: tag }));
+        const uniqueKey = Math.floor(100000000 + Math.random() * 900000000);
+        dispatch(addJobs({ key: uniqueKey, name: name, tags: tag }));
     }
 
     function onChangeName(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
